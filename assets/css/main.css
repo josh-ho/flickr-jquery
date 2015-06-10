@@ -192,11 +192,21 @@ a {
 img {
   max-width: 100%;
 }
+.clear {
+  clear: both;
+}
 .hide {
   display: none;
 }
 header {
   background: #323232;
+}
+header h1 {
+  font-family: "HelveticaNeueW01-75Bold";
+  color: #FFFFFF;
+  font-size: 25px;
+  font-size: 2.5rem;
+  padding: 20px;
 }
 nav {
   position: absolute;
@@ -209,12 +219,88 @@ nav {
 nav.hover {
   left: 0px;
 }
+.container {
+  padding: 20px;
+}
 .container .flickr {
-  width: 30%;
   overflow: hidden;
   float: left;
   border: 2px solid #FFFFFF;
+  position: relative;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  /*
+		&:first-child {
+			width: 60%;
+		}
+		*/
+
 }
-.container .flickr:first-child {
-  width: 60%;
+.container .flickr .imgContainer {
+  display: block;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.container .flickr .imgContainer img {
+  display: none;
+}
+.container .flickr .caption {
+  position: absolute;
+  bottom: 0px;
+  opacity: 0;
+  width: 100%;
+  background-color: #323232;
+  color: #FFFFFF;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+}
+.container .flickr .caption h2 {
+  font-family: "HelveticaNeueW01-75Bold";
+  font-size: 12px;
+  font-size: 1.2rem;
+}
+.container .flickr .caption a {
+  color: #FFFFFF;
+  text-decoration: none;
+}
+.container .flickr .caption a img,
+.container .flickr .caption a span {
+  vertical-align: middle;
+}
+.container .flickr .caption a .iconContainer {
+  overflow: hidden;
+  max-width: 50px;
+  display: inline-block;
+  border-radius: 50%;
+}
+.container .flickr .caption a .user-name {
+  text-decoration: underline;
+}
+.container .flickr.fadeOut {
+  opacity: 0;
+}
+.container .flickr.fadeOut.fadeIn {
+  opacity: 1;
+}
+.container .flickr:hover .caption,
+.container .flickr:focus .caption {
+  opacity: 1;
+}
+.load-more {
+  width: 100px;
+  margin: 0 auto;
+}
+.load-more a {
+  display: block;
+  padding: 5px 10px;
+  border: 1px solid #323232;
+  text-align: center;
+}
+footer {
+  background-color: #323232;
 }
