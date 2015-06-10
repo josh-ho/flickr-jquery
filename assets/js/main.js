@@ -18,7 +18,6 @@ var Main = ( function(){
 			url: "https://api.flickr.com/services/rest/?method=flickr.people.getPublicPhotos&api_key=" + apiKey + "&user_id=" + userID + "&format=json&nojsoncallback=1",
 			complete: function( returnData ) {
 				data = $.parseJSON( returnData.responseText );
-				console.log( data );
 			}
 		} );
 	}
