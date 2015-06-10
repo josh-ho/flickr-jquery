@@ -30,6 +30,9 @@ var Main = ( function(){
 			page++;
 			loadImages();
 		} else {
+			//sort the data by most recent
+			data = Helpers.sort( data, "mostrecent" );
+			//add images to the page
 			addImagesToPage();
 		}
 	}
@@ -169,9 +172,35 @@ var Helpers = ( function(){
 		$( '.websiteContainer' ).removeChild( $( '.lightbox' ) );
 	}
 
+	function sort( array, type ){
+		return array.sort( function( a, b ){
+			switch( type ){
+				case "mostrecent" :
+					if( a.datetaken > b.datetaken ) { //if the first date is earlier than the second date, move down
+						return -1; 
+					} else if( a.datetaken < b.datetaken ) { //if the first date is later than the second date, move up
+						return 1;
+					} else { //same value
+						return 0;
+					}
+					break;
+				case "alphabetical" :
+					if( a.title > b.title ) {
+						return -1; 
+					} else if( a.title < b.title ) {
+						return 1;
+					} else { //same value
+						return 0;
+					}
+					break;
+			}
+		});
+	}
+
 	return {
 		detectBrowser : detectBrowser,
 		createLightBox : createLightBox,
-		destroyLightBox : destroyLightBox
+		destroyLightBox : destroyLightBox,
+		sort : sort
 	}
 })();
