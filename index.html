@@ -14,11 +14,16 @@
 			<header>
 				<h1>Flickr</h1>
 				<nav>
-					<input type="text" id="searchTerms" />
+					<label>Search</label>
+					<input type="text" id="searchTerms" placeholder="Search"/>
 				</nav>
 			</header>
 			<section>
 				<div class="container"></div>
+				<div class="clear"></div>
+				<div class="load-more hide">
+					<a href="#">Load More</a>
+				</div>
 			</section>
 			<footer></footer>
 		</div>
@@ -28,16 +33,21 @@
 					<h2></h2>
 					<span clas="captionContainer">
 						<a href="#" class="user-link">
-							<img src="" alt="" class="user-icon" />
+							<span class="iconContainer">
+								<img src="" alt="" class="user-icon" />
+							</span>
 							<span class="user-name"></span>	
 						</a>
 					</span>
 				</span>
 				<a href="#" class="user-img">
-					<img src="" alt="" />
+					<span class="imgContainer">
+						<img src="" alt="" />
+					</span>
 				</a>
 			</div>
 			<div class="lightbox">
+				<div class="lightboxBackground"></div>
 				<div class="lightboxMain"></div>
 			</div>
 		</div>
