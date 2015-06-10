@@ -17,15 +17,37 @@ var Main = ( function(){
 			dataType: "json",
 			url: "https://api.flickr.com/services/rest/?method=flickr.people.getPublicPhotos&api_key=" + apiKey + "&user_id=" + userID + "&format=json&nojsoncallback=1",
 			complete: function( returnData ) {
-				data = $.parseJSON( returnData.responseText );
-				data = data.photos.photo;
-				addImagesToPage();
+				data = returnData.responseJSON.photos.photo;
+				console.log( data );
+				loadMetaData( addImagesToPage );
 			}
 		} );
-
+	}
+	
+	//load the meta data for each image
+	function loadMetaData( callback ) {
 		var i;
+		var j;
+		var counter = 1;
 		for( i = 0; i < data.length; i++ ){
-			
+			$.ajax( {
+				type: "GET",
+				dataType: "json",
+				url: "https://api.flickr.com/services/rest/?method=flickr.photos.getInfo&api_key=" + apiKey + "&photo_id=" + data[i].id + "&secret=" + data[i].secret + "&format=json&nojsoncallback=1",
+				complete: function( returnData ) {
+					for( j = 0; j < data.length; j++ ){
+						if( data[j].id == returnData.responseJSON.photo.id ){
+							data[j].meta = returnData.responseJSON.photo;
+						}
+					}
+
+					if( counter == data.length ){
+						callback();
+					} else {
+						counter++;
+					}
+				}
+			} );
 		}
 	}
 
