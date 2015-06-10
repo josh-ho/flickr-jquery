@@ -222,6 +222,14 @@ nav.hover {
 .container {
   padding: 20px;
 }
+.container .loading {
+  width: 150px;
+  margin: 0 auto;
+  text-align: center;
+}
+.container .loading p {
+  margin-bottom: 15px;
+}
 .container .flickr {
   overflow: hidden;
   float: left;
