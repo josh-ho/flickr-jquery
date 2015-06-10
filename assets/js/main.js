@@ -8,7 +8,8 @@ var Main = ( function(){
 	var apiKey = "a5e95177da353f58113fd60296e1d250"; //"ac6ae04116ad3e3f2664b5429c5d511e"
 	var apiSecret = "abaafa80dca58899";
 	var userID = "79513929@N00";//"132365033@N08";
-	var data;
+	var page = 1;
+	var data = [];
 	var numOfImagesToDisplay = 21;
 	var numberOfColumns = 3;
 	var calcImageSize = 0;
@@ -18,12 +19,19 @@ var Main = ( function(){
 		$.ajax( {
 			type: "GET",
 			dataType: "json",
-			url: "https://api.flickr.com/services/rest/?method=flickr.people.getPublicPhotos&api_key=" + apiKey + "&user_id=" + userID + "&extras=title,tags,description,owner_name,date_taken,views&format=json&nojsoncallback=1",
-			complete: function( returnData ) {
-				data = returnData.responseJSON.photos.photo;
-				addImagesToPage();
-			}
+			url: "https://api.flickr.com/services/rest/?method=flickr.people.getPublicPhotos&api_key=" + apiKey + "&user_id=" + userID + "&extras=title,tags,description,owner_name,date_taken,views&page=" + page + "&format=json&nojsoncallback=1",
+			complete: APIReturn
 		} );
+	}
+
+	function APIReturn( returnData ){
+		data = data.concat( returnData.responseJSON.photos.photo );
+		if( parseFloat( returnData.responseJSON.photos.page ) + 1 <= returnData.responseJSON.photos.pages ){
+			page++;
+			loadImages();
+		} else {
+			addImagesToPage();
+		}
 	}
 
 	function addImagesToPage(){
