@@ -9,6 +9,10 @@
 	font-smoothing: antialiased;
 }
 
+html, body {
+	font-family: "HelveticaNeueW01-55Roma";
+}
+
 p, span, a {
 	/*font-smoothing hack for Chrome on Windows*/
 	-webkit-text-stroke: 0.001px transparent;
@@ -24,6 +28,19 @@ img {
 
 header {
 	background: #323232;
+}
+
+nav {
+	position: absolute;
+	left: -100%;
+	-webkit-transition: 1s ease-in-out;
+    -moz-transition: 1s ease-in-out;
+    -o-transition: 1s ease-in-out;
+    transition: 1s ease-in-out;
+
+    &.hover {
+    	left: 0px;
+    }
 }
 
 .container {

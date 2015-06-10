@@ -178,6 +178,10 @@ html[xmlns] .clearfix {
   -webkit-font-smoothing: antialiased;
   font-smoothing: antialiased;
 }
+html,
+body {
+  font-family: "HelveticaNeueW01-55Roma";
+}
 p,
 span,
 a {
@@ -193,6 +197,17 @@ img {
 }
 header {
   background: #323232;
+}
+nav {
+  position: absolute;
+  left: -100%;
+  -webkit-transition: 1s ease-in-out;
+  -moz-transition: 1s ease-in-out;
+  -o-transition: 1s ease-in-out;
+  transition: 1s ease-in-out;
+}
+nav.hover {
+  left: 0px;
 }
 .container .flickr {
   width: 30%;
