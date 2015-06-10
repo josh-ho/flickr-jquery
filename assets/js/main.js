@@ -18,10 +18,37 @@ var Main = ( function(){
 			url: "https://api.flickr.com/services/rest/?method=flickr.people.getPublicPhotos&api_key=" + apiKey + "&user_id=" + userID + "&format=json&nojsoncallback=1",
 			complete: function( returnData ) {
 				data = $.parseJSON( returnData.responseText );
+				data = data.photos.photo;
+				addImagesToPage();
 			}
 		} );
+
+		var i;
+		for( i = 0; i < data.length; i++ ){
+			
+		}
 	}
 
+	function addImagesToPage(){
+		var i;
+		for( i = 0; i < data.length; i++ ){
+			var clonedObj = $( '.flickr', $( ".library" ) ).clone();
+			var imageURL = 'https://farm' + data[i].farm + '.staticflickr.com/' + data[i].server + '/' + data[i].id + '_' + data[i].secret + '_b.jpg';
+			
+			//determine if the image is portrait or landscape
+			var img = new Image();
+			img.src = imageURL;
+			var imgClass = "landscape";
+
+			if( img.height > img.width ){
+				imgClass = "portrait";
+			}
+
+			$( 'img', clonedObj ).attr( 'src', imageURL );
+			$( clonedObj ).addClass( imgClass );
+			$( '.container' ).append( clonedObj );
+		}
+	}
 
 	//public functions
 	function init(){

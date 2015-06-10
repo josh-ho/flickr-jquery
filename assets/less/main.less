@@ -1,6 +1,7 @@
 /* GLOBAL ASSETS */
 @import "reset.less";
 @import "mixins.less";
+@import "fonts.less";
 
 * {
 	-webkit-text-size-adjust: 100%;
@@ -13,6 +14,27 @@ p, span, a {
 	-webkit-text-stroke: 0.001px transparent;
 }
 
+img {
+	max-width: 100%;
+}
+
 .hide {
 	display: none;
+}
+
+header {
+	background: #323232;
+}
+
+.container {
+	.flickr {
+		width: 30%;
+		overflow: hidden;
+		float: left;
+		border: 2px solid #FFFFFF;
+
+		&:first-child {
+			width: 60%;
+		}
+	}
 }
