@@ -9,8 +9,9 @@ var Main = ( function(){
 	var apiSecret = "abaafa80dca58899";
 	var userID = "79513929@N00";//"132365033@N08";
 	var data;
-	var numOfImagesToDisplay = 20;
+	var numOfImagesToDisplay = 21;
 	var numberOfColumns = 3;
+	var calcImageSize = 0;
 
 	//private functions
 	function loadImages(){
@@ -55,6 +56,12 @@ var Main = ( function(){
 	function addImagesToPage(){
 		var i;
 		console.log( data );
+		
+		//figure out the proper size of the images and empty out the contents of the container
+		calcImageSize = ( numberOfColumns * parseInt( $( '.container .flickr' ).css( 'border-width' ), 10 ) * 2 );
+		$( '.container' ).empty();
+
+		//determine if we should show the load more button
 		if( data.length > numOfImagesToDisplay ){
 			$( '.load-more' ).removeClass( 'hide' );
 			$( '.load-more a' ).click( loadMoreClickHandler );
@@ -112,7 +119,8 @@ var Main = ( function(){
 	}
 
 	function calculateImageSize(){
-		return $( '.container' ).width() / numberOfColumns;
+		//width of the container + ( number of columns * image border size * 2 (for both sides) ) / number of columns
+		return ( $( '.container' ).width() - calcImageSize ) / numberOfColumns;
 	}
 
 	function resizeHandler(){
