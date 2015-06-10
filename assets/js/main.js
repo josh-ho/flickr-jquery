@@ -18,7 +18,6 @@ var Main = ( function(){
 			url: "https://api.flickr.com/services/rest/?method=flickr.people.getPublicPhotos&api_key=" + apiKey + "&user_id=" + userID + "&format=json&nojsoncallback=1",
 			complete: function( returnData ) {
 				data = returnData.responseJSON.photos.photo;
-				console.log( data );
 				loadMetaData( addImagesToPage );
 			}
 		} );
@@ -124,12 +123,19 @@ var Helpers = ( function(){
 		$( "body" ).addClass( className );
 	}
 
-	function createLightBox(){
+	function createLightBox( content ){
+		var lightbox = $( '.lightbox', $( '.library' ) ).clone();
+		$( '.lightboxMain', content ).append( content );
+		$( '.websiteContainer' ).append( lightbox );
+	}
 
+	function destroyLightBox(){
+		$( '.websiteContainer' ).removeChild( $( '.lightbox' ) );
 	}
 
 	return {
 		detectBrowser : detectBrowser,
-		createLightBox : createLightBox
+		createLightBox : createLightBox,
+		destroyLightBox : destroyLightBox
 	}
 })();
