@@ -18,39 +18,12 @@ var Main = ( function(){
 		$.ajax( {
 			type: "GET",
 			dataType: "json",
-			url: "https://api.flickr.com/services/rest/?method=flickr.people.getPublicPhotos&api_key=" + apiKey + "&user_id=" + userID + "&format=json&nojsoncallback=1",
+			url: "https://api.flickr.com/services/rest/?method=flickr.people.getPublicPhotos&api_key=" + apiKey + "&user_id=" + userID + "&extras=title,tags,description,owner_name,date_taken,views&format=json&nojsoncallback=1",
 			complete: function( returnData ) {
 				data = returnData.responseJSON.photos.photo;
-				loadMetaData( addImagesToPage );
+				addImagesToPage();
 			}
 		} );
-	}
-	
-	//load the meta data for each image
-	function loadMetaData( callback ) {
-		var i;
-		var j;
-		var counter = 1;
-		for( i = 0; i < data.length; i++ ){
-			$.ajax( {
-				type: "GET",
-				dataType: "json",
-				url: "https://api.flickr.com/services/rest/?method=flickr.photos.getInfo&api_key=" + apiKey + "&photo_id=" + data[i].id + "&secret=" + data[i].secret + "&format=json&nojsoncallback=1",
-				complete: function( returnData ) {
-					for( j = 0; j < data.length; j++ ){
-						if( data[j].id == returnData.responseJSON.photo.id ){
-							data[j].meta = returnData.responseJSON.photo;
-						}
-					}
-
-					if( counter == data.length ){
-						callback();
-					} else {
-						counter++;
-					}
-				}
-			} );
-		}
 	}
 
 	function addImagesToPage(){
@@ -70,24 +43,13 @@ var Main = ( function(){
 		for( i = 0; i < data.length; i++ ){
 			var clonedObj = $( '.flickr', $( ".library" ) ).clone();
 			var imageURL = 'https://farm' + data[i].farm + '.staticflickr.com/' + data[i].server + '/' + data[i].id + '_' + data[i].secret + '_b.jpg';
-			/*
-			$( '.user-img img', clonedObj ).bind( "load", function(){
-				//determine if the image is portrait or landscape.
-				var imgClass = "landscape";
-
-				if( $( this ).height() > $( this ).width() ){
-					imgClass = "portrait";
-				}
-
-				$( this ).parent().parent().addClass( imgClass );
-			} ).attr( 'src', imageURL );
-			*/
 			$( '.user-img .imgContainer', clonedObj ).attr( 'style', 'background-image:url("' + imageURL + '"); width: ' + calculateImageSize() + 'px; height: ' + calculateImageSize() + 'px' );
 			
 			//add the meta information
-			$( 'h2', clonedObj ).html( $.trim( data[i].meta.title._content ) );
-			$( '.user-icon', clonedObj ).attr( 'src', "//c1.staticflickr.com/" + data[i].meta.owner.iconfarm + "/" + data[i].meta.owner.iconserver + "/buddyicons/"+ userID + "_l.jpg" )
-			$( '.user-name', clonedObj ).html( $.trim( data[i].meta.owner.realname ) );
+			$( 'h2', clonedObj ).html( $.trim( data[i].title ) );
+			$( '.user-icon', clonedObj ).attr( 'src', "//c1.staticflickr.com/" + data[i].farm + "/" + data[i].server + "/buddyicons/"+ userID + "_l.jpg" )
+			$( '.user-name', clonedObj ).html( $.trim( data[i].ownername ) );
+
 			$( '.user-link', clonedObj ).attr( "href", "https://www.flickr.com/photos/" + userID );
 
 			//add the click handler
