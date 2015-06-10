@@ -9,6 +9,7 @@ var Main = ( function(){
 	var apiSecret = "abaafa80dca58899";
 	var userID = "132365033@N08";
 	var data;
+	var numOfImagesToDisplay = 20;
 
 	//private functions
 	function loadImages(){
@@ -52,6 +53,7 @@ var Main = ( function(){
 
 	function addImagesToPage(){
 		var i;
+		console.log( data );
 		for( i = 0; i < data.length; i++ ){
 			var clonedObj = $( '.flickr', $( ".library" ) ).clone();
 			var imageURL = 'https://farm' + data[i].farm + '.staticflickr.com/' + data[i].server + '/' + data[i].id + '_' + data[i].secret + '_b.jpg';
@@ -67,8 +69,23 @@ var Main = ( function(){
 
 			$( 'img', clonedObj ).attr( 'src', imageURL );
 			$( clonedObj ).addClass( imgClass );
+			
+			//add the meta information
+			$( 'h2', clonedObj ).html( $.trim( data[i].meta.title._content ) );
+			$( '.user-link', clonedObj ).html(  );
+			$( '.user-icon', clonedObj ).attr( 'src', "//c1.staticflickr.com/" + data[i].meta.owner.iconfarm + "/" + data[i].meta.owner.iconserver + "/buddyicons/"+ userID + "_l.jpg" )
+			$( '.user-name', clonedObj ).html( $.trim( data[i].meta.owner.realname ) );
+			$( '.user-link', clonedObj ).attr( "href", "https://www.flickr.com/photos/" + userID );
+
+			//add the click handler
+			$( '.user-img' ).click( imgClickHandler );
+
 			$( '.container' ).append( clonedObj );
 		}
+	}
+
+	function imgClickHandler(){
+		Helpers.createLightBox();
 	}
 
 	//public functions
