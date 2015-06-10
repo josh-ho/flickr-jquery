@@ -42,7 +42,7 @@ var Main = ( function(){
 		console.log( data );
 		
 		//figure out the proper size of the images and empty out the contents of the container
-		calcImageSize = ( numberOfColumns * parseInt( $( '.container .flickr' ).css( 'border-width' ), 10 ) * 2 );
+		calcImageSize = numberOfColumns * ( parseInt( $( '.container .flickr' ).css( 'border-left-width' ), 10 ) + parseInt( $( '.container .flickr' ).css( 'border-right-width' ), 10 ) );
 		$( '.container' ).empty();
 
 		//determine if we should show the load more button
