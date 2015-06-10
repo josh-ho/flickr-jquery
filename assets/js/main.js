@@ -63,7 +63,7 @@ var Main = ( function(){
 		for( i = 0; i < data.length; i++ ){
 			var clonedObj = $( '.flickr', $( ".library" ) ).clone();
 			var imageURL = 'https://farm' + data[i].farm + '.staticflickr.com/' + data[i].server + '/' + data[i].id + '_' + data[i].secret + '_b.jpg';
-			
+			/*
 			$( '.user-img img', clonedObj ).bind( "load", function(){
 				//determine if the image is portrait or landscape.
 				var imgClass = "landscape";
@@ -74,7 +74,7 @@ var Main = ( function(){
 
 				$( this ).parent().parent().addClass( imgClass );
 			} ).attr( 'src', imageURL );
-
+			*/
 			$( '.user-img .imgContainer', clonedObj ).attr( 'style', 'background-image:url("' + imageURL + '"); width: ' + calculateImageSize() + 'px; height: ' + calculateImageSize() + 'px' );
 			
 			//add the meta information
