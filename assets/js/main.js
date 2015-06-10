@@ -19,7 +19,7 @@ var Main = ( function(){
 		$.ajax( {
 			type: "GET",
 			dataType: "json",
-			url: "https://api.flickr.com/services/rest/?method=flickr.people.getPublicPhotos&api_key=" + apiKey + "&user_id=" + userID + "&extras=title,tags,description,owner_name,date_taken,views&page=" + page + "&format=json&nojsoncallback=1",
+			url: "https://api.flickr.com/services/rest/?method=flickr.people.getPublicPhotos&api_key=" + apiKey + "&user_id=" + userID + "&extras=title,tags,description,owner_name,icon_server,date_taken,views&page=" + page + "&format=json&nojsoncallback=1",
 			complete: APIReturn
 		} );
 	}
@@ -58,13 +58,17 @@ var Main = ( function(){
 			
 			//add the meta information
 			$( 'h2', clonedObj ).html( $.trim( data[i].title ) );
-			$( '.user-icon', clonedObj ).attr( 'src', "//c1.staticflickr.com/" + data[i].farm + "/" + data[i].server + "/buddyicons/"+ userID + "_l.jpg" )
+			console.log( )
+			$( '.user-icon', clonedObj ).attr( 'src', "http://c1.staticflickr.com/" + data[i].iconfarm + "/" + data[i].iconserver + "/buddyicons/"+ userID + "_l.jpg" )
 			$( '.user-name', clonedObj ).html( $.trim( data[i].ownername ) );
 
 			$( '.user-link', clonedObj ).attr( "href", "https://www.flickr.com/photos/" + userID );
 
 			//add the click handler
 			$( '.user-img', clonedObj ).click( imgClickHandler );
+
+			//add the index value for the lightbox
+			$( '.user-img', clonedObj ).attr( 'data-index', i );
 
 			$( '.container' ).append( clonedObj );
 
@@ -77,7 +81,7 @@ var Main = ( function(){
 	function loadMoreClickHandler() {
 		var i = 0;
 		while( i < numOfImagesToDisplay ){
-			$( $( '.container .flickr.hide' )[0] ).removeClass( 'hide' );
+			$( $( '.container .flickr.hide' )[0] ).removeClass( 'hide fadeOut' );
 			i++;
 		}
 
