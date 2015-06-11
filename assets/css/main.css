@@ -292,6 +292,9 @@ section.advancedMenu .filterContainer {
 .container .flickr .imgContainer img {
   display: none;
 }
+.container .flickr.tabletMobile .caption {
+  opacity: 1;
+}
 .container .flickr .caption {
   position: absolute;
   bottom: 0px;
