@@ -47,7 +47,7 @@ var Main = ( function(){
 
 	function addImagesToPage(){
 		var i;
-		console.log( data );
+		//console.log( data );
 		
 		//figure out the proper size of the images and empty out the contents of the container
 		if( !firstTime ) {
@@ -156,7 +156,6 @@ var Main = ( function(){
 	function search( inputValue ){
 		var tempData = [];
 		var i;
-		console.log( backupData.length, data.length, inputValue, $( 'input[type=text]' ).val() );
 		data = backupData;
 
 		for( i = 0; i < data.length; i++ ){
@@ -203,6 +202,12 @@ var Main = ( function(){
 		}
 	}
 
+	function backtoTopHandler(){
+		$( 'body, html' ).animate( {
+			scrollTop : 0
+		}, 500 );
+	}
+
 	//public functions
 	function init(){
 		loadImages();
@@ -227,6 +232,8 @@ var Main = ( function(){
 			}
 			return false;
 		});
+
+		$( '.back-to-top' ).click( backtoTopHandler )
 	}
 
 	return {
