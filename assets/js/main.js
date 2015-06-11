@@ -10,6 +10,7 @@ var Main = ( function(){
 	var userID = "79513929@N00";//"132365033@N08";
 	var page = 1;
 	var data = [];
+	var backupData = [];
 	var numOfImagesToDisplay = 21;
 	var numberOfColumns = 3;
 	var calcImageSize = 0;
@@ -32,10 +33,11 @@ var Main = ( function(){
 		} else {
 			//sort the data by most recent
 			data = Helpers.sort( data, "mostrecent" );
-
+			backupData = data;
 			//enable advanced filters
 			$( '.filterContainer select' ).change( dropdownChangeHandler );
 			$( '.filterContainer input' ).bind( 'keydown click', searchHandler );
+			$( '.filterContainer button' ).click( resetHandler );
 
 			//add images to the page
 			addImagesToPage();
@@ -80,7 +82,7 @@ var Main = ( function(){
 				clonedObj.addClass( 'hide fadeOut' );
 			}
 		}
-
+		$( '.container' ).append( $( '.library .clear' ).clone() );
 		$( window ).trigger( 'load' ); //fire load so that it fixes the images on first time load
 	}
 
@@ -128,8 +130,17 @@ var Main = ( function(){
 		}
 	}
 
-	function searchHandler() {
+	function searchHandler( evt ) {
+		switch( evt.type ){
+			case "click":
+				if( $( this ).is( "input[type=button]" ) ){
 
+				}
+				break;
+			case "keydown" :
+				console.log( evt.keyCode );
+				break;
+		}
 	}
 
 	function dropdownChangeHandler(){
@@ -138,6 +149,13 @@ var Main = ( function(){
 			data = Helpers.sort( data, dropdownValue );
 			addImagesToPage();
 		});
+	}
+
+	function resetHandler(){
+		hideImagesOnScreen( function(){
+			data = backupData;
+			addImagesToPage();
+		})
 	}
 
 	function resizeHandler(){
