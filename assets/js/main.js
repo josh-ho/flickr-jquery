@@ -7,7 +7,7 @@ var Main = ( function(){
 
 	var apiKey = "a5e95177da353f58113fd60296e1d250"; //"ac6ae04116ad3e3f2664b5429c5d511e"
 	var apiSecret = "abaafa80dca58899";
-	var userID = "79513929@N00";//"132365033@N08";
+	var userID = "132365033@N08";
 	var page = 1;
 	var data = [];
 	var backupData = [];
@@ -47,7 +47,7 @@ var Main = ( function(){
 
 	function addImagesToPage(){
 		var i;
-		//console.log( data );
+		console.log( data );
 		
 		//figure out the proper size of the images and empty out the contents of the container
 		if( !firstTime ) {
@@ -156,7 +156,7 @@ var Main = ( function(){
 	function search( inputValue ){
 		var tempData = [];
 		var i;
-
+		console.log( backupData.length, data.length, inputValue, $( 'input[type=text]' ).val() );
 		data = backupData;
 
 		for( i = 0; i < data.length; i++ ){
@@ -168,6 +168,7 @@ var Main = ( function(){
 		data = tempData;
 		hideImagesOnScreen( function(){
 			addImagesToPage();
+			data = backupData;
 		});
 		
 	}
