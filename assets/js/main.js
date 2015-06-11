@@ -14,6 +14,7 @@ var Main = ( function(){
 	var numOfImagesToDisplay = 21;
 	var numberOfColumns = 3;
 	var calcImageSize = 0;
+	var firstTime = false;
 
 	//private functions
 	function loadImages(){
@@ -49,7 +50,10 @@ var Main = ( function(){
 		//console.log( data );
 		
 		//figure out the proper size of the images and empty out the contents of the container
-		calcImageSize = numberOfColumns * ( parseInt( $( '.container .flickr' ).css( 'border-left-width' ), 10 ) + parseInt( $( '.container .flickr' ).css( 'border-right-width' ), 10 ) );
+		if( !firstTime ) {
+			calcImageSize = numberOfColumns * ( parseInt( $( '.container .flickr' ).css( 'border-left-width' ), 10 ) + parseInt( $( '.container .flickr' ).css( 'border-right-width' ), 10 ) );
+			firstTime = true;
+		}
 		$( '.container' ).empty();
 
 		//determine if we should show the load more button
@@ -142,7 +146,6 @@ var Main = ( function(){
 				}
 				break;
 			case "keydown" :
-				console.log( evt.keyCode );
 				if( evt.keyCode != 13 ){
 					search( $( this ).val() );
 				}
