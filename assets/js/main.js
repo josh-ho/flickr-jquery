@@ -75,6 +75,8 @@ var Main = ( function(){
 				clonedObj.addClass( 'hide fadeOut' );
 			}
 		}
+
+		$( window ).trigger( 'load' ); //fire load so that it fixes the images on first time load
 	}
 
 	function loadMoreClickHandler() {
@@ -119,6 +121,26 @@ var Main = ( function(){
 	function init(){
 		loadImages();
 		$( window ).bind( 'resize orientationchange load', resizeHandler );
+		$( '.nav-anchor' ).click( function(){
+			if( $( this ).hasClass( 'closed' ) ){
+				var calcHeight = $( '.advancedMenu' ).css( 'height', 'auto' ).outerHeight( true );
+				$( '.advancedMenu' ).css( {
+					'height' : 0, 
+					'padding-bottom' : '10px' 
+				} ).height( calcHeight );
+				$( '.copy', $( this ) ).html( $( this ).attr( 'data-close' ) );
+				$( '.close', $( this ) ).show();
+				$( '.open', $( this ) ).hide();
+				$( this ).removeClass( 'closed' ).addClass( 'opened' );
+			} else if( $( this ).hasClass( 'opened' ) ){
+				$( '.advancedMenu' ).attr( 'style', '' );
+				$( '.copy', $( this ) ).html( $( this ).attr( 'data-open' ) );
+				$( '.close', $( this ) ).hide();
+				$( '.open', $( this ) ).show();
+				$( this ).removeClass( 'opened' ).addClass( 'closed' );
+			}
+			return false;
+		});
 	}
 
 	return {
@@ -212,6 +234,15 @@ var Helpers = ( function(){
 						return -1; 
 					} else if( a.title < b.title ) {
 						return 1;
+					} else { //same value
+						return 0;
+					}
+					break;
+				case "mostrecent" :
+					if( a.datetaken > b.datetaken ) { //if the first date is earlier than the second date, move down
+						return 1; 
+					} else if( a.datetaken < b.datetaken ) { //if the first date is later than the second date, move up
+						return -1;
 					} else { //same value
 						return 0;
 					}

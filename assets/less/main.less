@@ -45,12 +45,13 @@ nav {
 	position: absolute;
 	z-index: 10;
 	left: 0px;
+	width: 96%;
 	font-family: "HelveticaNeueW01-75Bold";
 	color: #FFFFFF;
 	.font-size(12);
 	text-transform: uppercase;
 	background-color: #7F1C7D;
-	padding: 20px;
+	padding: 2%;
 	-webkit-transition: all 0.5s ease-in-out;
 	-moz-transition: all 0.5s ease-in-out;
 	-o-transition: all 0.5s ease-in-out;
@@ -79,6 +80,14 @@ section {
 		-o-transition: all 0.5s ease-in-out;
 		transition: all 0.5s ease-in-out;
 		
+		label, select, input {
+			vertical-align: middle;
+		}
+
+		.filterContainer {
+			float: left;
+			margin-left: 15px;
+		}
 	}
 }
 
@@ -88,6 +97,7 @@ section {
 
 .container {
 	padding: 20px;
+	margin: 70px 0 20px;
 
 	.loading {
 		width: 150px;
