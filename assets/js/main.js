@@ -185,6 +185,14 @@ var Main = ( function(){
 			"width" : calculateImageSize(),
 			"height" : calculateImageSize()
 		} );
+
+		if( $( '.nav-anchor' ).hasClass( 'opened' ) ){
+			var calcHeight = $( '.advancedMenu' ).css( 'height', 'auto' ).outerHeight( true );
+			$( '.advancedMenu' ).css( {
+				'height' : 0, 
+				'padding-bottom' : '10px' 
+			} ).height( calcHeight );
+		}
 	}
 
 	//public functions
