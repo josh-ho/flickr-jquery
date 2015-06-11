@@ -105,7 +105,7 @@ var Main = ( function(){
 
 	function calculateImageSize(){
 		//width of the container + ( number of columns * image border size * 2 (for both sides) ) / number of columns
-		return ( $( '.container' ).width() - calcImageSize ) / numberOfColumns;
+		return Math.floor( ( $( '.container' ).width() - calcImageSize ) / numberOfColumns );
 	}
 
 	function resizeHandler(){

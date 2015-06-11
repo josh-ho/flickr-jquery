@@ -14,8 +14,24 @@
 			<header>
 				<h1>Flickr</h1>
 				<nav>
-					<label>Search</label>
-					<input type="text" id="searchTerms" placeholder="Search"/>
+					<section class="advancedMenu">
+						<div class="filterContainer">
+							<label>Search</label>
+							<input type="text" id="searchTerms" placeholder="Search" />
+							<input type="button" value="search" />
+						</div>
+						<div class="filterContainer">
+							<label>Sort by:</label>
+							<select>
+								<option value="mostrecent">Most Recent</option>
+								<option value="alphabetical">Alphabetical</option>
+							</select>
+						</div>
+					</section>
+					<a href="#">
+						<img src="./assets/images/menu.png" alt="" />
+						Advanced Filter
+					</a>
 				</nav>
 			</header>
 			<section>
