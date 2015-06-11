@@ -37,7 +37,7 @@ var Main = ( function(){
 			backupData = data;
 			//enable advanced filters
 			$( '.filterContainer select' ).change( dropdownChangeHandler );
-			$( '.filterContainer input' ).bind( 'keydown click', searchHandler );
+			$( '.filterContainer input' ).bind( 'keyup click', searchHandler );
 			$( '.filterContainer button' ).click( resetHandler );
 
 			//add images to the page
@@ -149,7 +149,7 @@ var Main = ( function(){
 					search( $( '.filterContainer input[type=text]' ).val() );
 				}
 				break;
-			case "keydown" :
+			case "keyup" :
 				if( evt.keyCode != 13 ){
 					search( $( this ).val() );
 				}
