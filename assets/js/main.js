@@ -58,7 +58,6 @@ var Main = ( function(){
 			
 			//add the meta information
 			$( 'h2', clonedObj ).html( $.trim( data[i].title ) );
-			console.log( )
 			$( '.user-icon', clonedObj ).attr( 'src', "http://c1.staticflickr.com/" + data[i].iconfarm + "/" + data[i].iconserver + "/buddyicons/"+ userID + "_l.jpg" )
 			$( '.user-name', clonedObj ).html( $.trim( data[i].ownername ) );
 
@@ -167,9 +166,16 @@ var Helpers = ( function(){
 	}
 
 	function createLightBox( content ){
+		if( $( '.websiteContainer .lightbox').length != 0 ) return false;
+
 		var lightbox = $( '.lightbox', $( '.library' ) ).clone();
+		lightbox.addClass( 'fadeOut' );
 		$( '.lightboxMain', content ).append( content );
 		$( '.websiteContainer' ).append( lightbox );
+		//throw a delay for the CSS animation
+		setTimeout( function(){
+			lightbox.removeClass( 'fadeOut' );
+		}, 100 );
 	}
 
 	function destroyLightBox(){
