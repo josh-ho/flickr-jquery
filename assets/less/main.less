@@ -165,7 +165,7 @@ nav {
 }
 
 .lightbox {
-	position: absolute;
+	position: fixed;
 	top: 0px;
 	width: 100%;
 	height: 100%;
@@ -181,6 +181,58 @@ nav {
 		height: 100%;
 		background-color: #000000;
 		opacity: 0.6;
+	}
+
+	.lightboxMain {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: 70%;
+		margin: -35% 0 0 -35%;
+		background: #FFFFFF;
+		padding: 20px;
+
+		.mainLightboxImg {
+			display: block;
+			max-height: 415px;
+			margin: 0 auto 20px;
+		}
+
+		h2 {
+			font-family: "HelveticaNeueW01-75Bold";
+			.font-size(12);
+		}
+
+		.description {
+			height: 50px;
+			overflow-y: scroll;
+		}
+
+		.user-link {
+			text-decoration: none;
+		}
+
+		.iconContainer {
+			overflow: hidden;
+			max-width: 50px;
+			display: inline-block;
+			border-radius: 50%;
+			vertical-align: middle;
+		}
+
+		.user-name {
+			text-decoration: underline;
+			vertical-align: middle;
+			color: #323232
+		}
+
+		.close-btn {
+			position: absolute;
+			z-index: 150;
+			top: 0px;
+			right: 0px;
+			width: 30px;
+		}
 	}
 
 	&.fadeOut {

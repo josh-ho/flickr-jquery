@@ -313,7 +313,7 @@ nav.hover {
   text-align: center;
 }
 .lightbox {
-  position: absolute;
+  position: fixed;
   top: 0px;
   width: 100%;
   height: 100%;
@@ -328,6 +328,51 @@ nav.hover {
   height: 100%;
   background-color: #000000;
   opacity: 0.6;
+}
+.lightbox .lightboxMain {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 70%;
+  margin: -35% 0 0 -35%;
+  background: #FFFFFF;
+  padding: 20px;
+}
+.lightbox .lightboxMain .mainLightboxImg {
+  display: block;
+  max-height: 415px;
+  margin: 0 auto 20px;
+}
+.lightbox .lightboxMain h2 {
+  font-family: "HelveticaNeueW01-75Bold";
+  font-size: 12px;
+  font-size: 1.2rem;
+}
+.lightbox .lightboxMain .description {
+  height: 50px;
+  overflow-y: scroll;
+}
+.lightbox .lightboxMain .user-link {
+  text-decoration: none;
+}
+.lightbox .lightboxMain .iconContainer {
+  overflow: hidden;
+  max-width: 50px;
+  display: inline-block;
+  border-radius: 50%;
+  vertical-align: middle;
+}
+.lightbox .lightboxMain .user-name {
+  text-decoration: underline;
+  vertical-align: middle;
+  color: #323232;
+}
+.lightbox .lightboxMain .close-btn {
+  position: absolute;
+  z-index: 150;
+  top: 0px;
+  right: 0px;
+  width: 30px;
 }
 .lightbox.fadeOut {
   opacity: 0;

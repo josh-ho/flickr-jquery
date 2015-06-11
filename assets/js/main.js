@@ -91,7 +91,16 @@ var Main = ( function(){
 	}
 
 	function imgClickHandler(){
-		Helpers.createLightBox();
+		Helpers.createLightBox( onLightboxComplete( $( this ).attr( 'data-index' ) ) );
+	}
+
+	function onLightboxComplete( index ){
+		$( '.mainLightboxImg' ).attr( "src", 'https://farm' + data[index].farm + '.staticflickr.com/' + data[index].server + '/' + data[index].id + '_' + data[index].secret + '_b.jpg' );
+		$( 'h2', $( '.lightbox' ) ).html( $.trim( data[index].title ) );
+		$( '.description', $( '.lightbox' ) ).html( $.trim( data[index].description._content ) );
+		$( '.user-icon', $( '.lightbox' ) ).attr( 'src', "http://c1.staticflickr.com/" + data[index].iconfarm + "/" + data[index].iconserver + "/buddyicons/"+ userID + "_l.jpg" )
+		$( '.user-name', $( '.lightbox' ) ).html( $.trim( data[index].ownername ) );
+		$( '.user-link', $( '.lightbox' ) ).attr( "href", "https://www.flickr.com/photos/" + userID );
 	}
 
 	function calculateImageSize(){
@@ -165,21 +174,25 @@ var Helpers = ( function(){
 		$( "body" ).addClass( className );
 	}
 
-	function createLightBox( content ){
-		if( $( '.websiteContainer .lightbox').length != 0 ) return false;
+	function createLightBox( callback ){
+		if( $( '.websiteContainer .lightbox' ).length != 0 ) return false;
 
 		var lightbox = $( '.lightbox', $( '.library' ) ).clone();
 		lightbox.addClass( 'fadeOut' );
-		$( '.lightboxMain', content ).append( content );
 		$( '.websiteContainer' ).append( lightbox );
 		//throw a delay for the CSS animation
 		setTimeout( function(){
 			lightbox.removeClass( 'fadeOut' );
+			$( '.lightboxBackground, .close-btn' ).click( destroyLightBox );
+			callback;
 		}, 100 );
 	}
 
 	function destroyLightBox(){
-		$( '.websiteContainer' ).removeChild( $( '.lightbox' ) );
+		$( '.websiteContainer .lightbox' ).addClass( 'fadeOut' );
+		$( '.websiteContainer .lightbox' ).bind( 'transitionend', function(){
+			$( '.websiteContainer .lightbox' ).remove();
+		} );
 	}
 
 	function sort( array, type ){
