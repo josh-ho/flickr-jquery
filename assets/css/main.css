@@ -426,4 +426,19 @@ footer {
     float: none;
     margin: 15px 0;
   }
+  .container .flickr {
+    float: none;
+  }
+  .container .flickr .imgContainer {
+    max-height: 300px;
+  }
+  .container .flickr .caption {
+    position: static;
+    display: block;
+    opacity: 1;
+  }
+  .container .flickr .caption h2 {
+    margin-top: 0px;
+    padding-top: 10px;
+  }
 }

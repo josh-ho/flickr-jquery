@@ -113,8 +113,12 @@ var Main = ( function(){
 	}
 
 	function calculateImageSize(){
-		//width of the container + ( number of columns * image border size * 2 (for both sides) ) / number of columns
-		return Math.floor( ( $( '.container' ).width() - calcImageSize ) / numberOfColumns );
+		if( $( '.container .flickr' ).css( 'float' ) != "none" ){
+			//width of the container + ( number of columns * image border size * 2 (for both sides) ) / number of columns
+			return Math.floor( ( $( '.container' ).width() - calcImageSize ) / numberOfColumns );
+		} else {
+			return $( '.container' ).width();
+		}
 	}
 
 	function hideImagesOnScreen( callback ){
