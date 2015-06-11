@@ -305,6 +305,7 @@ section.advancedMenu .filterContainer {
   transition: all 0.5s ease-in-out;
 }
 .container .flickr .caption h2 {
+  margin: 10px 10px 0 10px;
   font-family: "HelveticaNeueW01-75Bold";
   font-size: 12px;
   font-size: 1.2rem;
@@ -339,14 +340,18 @@ section.advancedMenu .filterContainer {
   opacity: 1;
 }
 .load-more {
-  width: 100px;
+  width: 150px;
   margin: 0 auto;
 }
 .load-more a {
   display: block;
   padding: 5px 10px;
-  border: 1px solid #323232;
+  margin: 20px 0;
+  border: 5px solid #323232;
   text-align: center;
+  font-family: "HelveticaNeueW01-75Bold";
+  text-transform: uppercase;
+  color: #323232;
 }
 .lightbox {
   position: fixed;

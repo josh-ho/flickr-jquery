@@ -32,6 +32,11 @@ var Main = ( function(){
 		} else {
 			//sort the data by most recent
 			data = Helpers.sort( data, "mostrecent" );
+
+			//enable advanced filters
+			$( '.filterContainer select' ).change( dropdownChangeHandler );
+			$( '.filterContainer input' ).bind( 'keydown click', searchHandler );
+
 			//add images to the page
 			addImagesToPage();
 		}
@@ -108,6 +113,31 @@ var Main = ( function(){
 	function calculateImageSize(){
 		//width of the container + ( number of columns * image border size * 2 (for both sides) ) / number of columns
 		return Math.floor( ( $( '.container' ).width() - calcImageSize ) / numberOfColumns );
+	}
+
+	function hideImagesOnScreen( callback ){
+		var i;
+		for( i = 0; i < data.length; i++ ){
+			$( $( '.container .flickr' )[i] ).bind( 'transitionend', function(){
+				$( this ).remove();
+
+				if( i + 1 >= data.length ){
+					callback();
+				}
+			} ).addClass( 'fadeOut' );
+		}
+	}
+
+	function searchHandler() {
+
+	}
+
+	function dropdownChangeHandler(){
+		var dropdownValue = $( this ).val();
+		hideImagesOnScreen( function(){
+			data = Helpers.sort( data, dropdownValue );
+			addImagesToPage();
+		});
 	}
 
 	function resizeHandler(){
@@ -231,14 +261,14 @@ var Helpers = ( function(){
 					break;
 				case "alphabetical" :
 					if( a.title > b.title ) {
-						return -1; 
+						return 1; 
 					} else if( a.title < b.title ) {
-						return 1;
+						return -1;
 					} else { //same value
 						return 0;
 					}
 					break;
-				case "mostrecent" :
+				case "oldest" :
 					if( a.datetaken > b.datetaken ) { //if the first date is earlier than the second date, move down
 						return 1; 
 					} else if( a.datetaken < b.datetaken ) { //if the first date is later than the second date, move up
