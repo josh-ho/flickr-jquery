@@ -134,13 +134,35 @@ var Main = ( function(){
 		switch( evt.type ){
 			case "click":
 				if( $( this ).is( "input[type=button]" ) ){
-
+					search( $( '.filterContainer input[type=text]' ).val() );
 				}
 				break;
 			case "keydown" :
 				console.log( evt.keyCode );
+				if( evt.keyCode != 13 ){
+					search( $( this ).val() );
+				}
 				break;
 		}
+	}
+
+	function search( inputValue ){
+		var tempData = [];
+		var i;
+
+		data = backupData;
+
+		for( i = 0; i < data.length; i++ ){
+			if( String( data[i].title ).indexOf( inputValue ) != -1 ){
+				tempData.push( data[i] );
+			}
+		}
+		
+		data = tempData;
+		hideImagesOnScreen( function(){
+			addImagesToPage();
+		});
+		
 	}
 
 	function dropdownChangeHandler(){
