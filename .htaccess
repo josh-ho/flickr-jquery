@@ -1,0 +1,4 @@
+AuthUserFile /home/content/j/o/s/joshho/html/labs/flickr/.htpasswd
+AuthType Basic
+AuthName "IBM Flickr"
+Require valid-user
